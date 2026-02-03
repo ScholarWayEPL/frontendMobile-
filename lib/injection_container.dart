@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:scholarway/features/auth/presentation/bloc/auth_state.dart';
+import 'package:scholarway/features/auth/presentation/state/auth_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 

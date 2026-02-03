@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/logout_usecase.dart';
 import '../../domain/usecases/register_usecase.dart';
-import '../bloc/auth_state.dart';
+import '../state/auth_state.dart';
 import '../../../../core/usecases/usecase.dart';
 
 /// Notifier pour gérer l'état d'authentification
