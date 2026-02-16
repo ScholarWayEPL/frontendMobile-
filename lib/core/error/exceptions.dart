@@ -10,30 +10,25 @@ class AppException implements Exception {
 
 /// Exception serveur
 class ServerException extends AppException {
-  ServerException([String message = 'Erreur serveur survenue'])
-    : super(message);
+  ServerException([super.message = 'Erreur serveur survenue']);
 }
 
 /// Exception de cache
 class CacheException extends AppException {
-  CacheException([String message = 'Erreur de cache survenue'])
-    : super(message);
+  CacheException([super.message = 'Erreur de cache survenue']);
 }
 
 /// Exception réseau
 class NetworkException extends AppException {
-  NetworkException([String message = 'Erreur réseau survenue'])
-    : super(message);
+  NetworkException([super.message = 'Erreur réseau survenue']);
 }
 
 /// Exception de validation
 class ValidationException extends AppException {
-  ValidationException([String message = 'Erreur de validation survenue'])
-    : super(message);
+  ValidationException([super.message = 'Erreur de validation survenue']);
 }
 
 /// Exception d'authentification
 class AuthException extends AppException {
-  AuthException([String message = 'Erreur d\'authentification survenue'])
-    : super(message);
+  AuthException([super.message = 'Erreur d\'authentification survenue']);
 }
