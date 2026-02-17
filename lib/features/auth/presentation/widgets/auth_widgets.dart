@@ -361,14 +361,30 @@ class AuthSocialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: OutlinedButton.icon(
+      child: OutlinedButton(
         onPressed: onPressed,
-        icon: icon != null
-            ? Icon(icon, size: 20.sp, color: AuthColors.white70)
-            : null,
-        label: Row(
+        style: OutlinedButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: 14.h),
+          side: BorderSide(color: AuthColors.fieldBorder, width: 1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+        ),
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            if (icon != null)
+              Icon(icon, size: 20.sp, color: AuthColors.white70)
+            else if (textIcon != null)
+              Text(
+                textIcon!,
+                style: TextStyle(
+                  color: AuthColors.white70,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            SizedBox(width: 8.w),
             Text(
               label,
               style: TextStyle(
@@ -378,13 +394,6 @@ class AuthSocialButton extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 14.h),
-          side: BorderSide(color: AuthColors.fieldBorder, width: 1),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r),
-          ),
         ),
       ),
     );
@@ -451,7 +460,7 @@ class AuthFooter extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         Text(
-          'SYSTÈMES ACADÉMIQUES SCHOLARWAY © 2024',
+          'SYSTÈMES ACADÉMIQUES SCHOLARWAY © 2026',
           style: TextStyle(
             color: AuthColors.white20,
             fontSize: 9.sp,

@@ -15,10 +15,10 @@ class BacSeries {
   });
 }
 
-/// Constantes des séries disponibles
+/// Constantes des séries disponibles au Togo
 const kBacSeriesList = [
-  BacSeries(code: 'S', label: 'Scientifique (S)', description: 'Maths, Phys, SVT'),
-  BacSeries(code: 'L', label: 'Littéraire (L)', description: 'Langues, Philo'),
+  BacSeries(code: 'D', label: 'Scientifique(S)', description: 'Maths, Phys, SVT'),
+  BacSeries(code: 'C', label: 'Littéraire (L)', description: 'Langues, Philo'),
   BacSeries(code: 'ES', label: 'Économique (ES)', description: 'Sc. Sociales'),
   BacSeries(code: 'T', label: 'Technique', description: 'Ingénierie, Info'),
 ];
@@ -36,48 +36,84 @@ class BacSeriesSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 10.w,
-      runSpacing: 10.h,
-      children: kBacSeriesList.map((series) {
-        final isSelected = selectedCode == series.code;
-        return GestureDetector(
-          onTap: () => onSelected(series.code),
-          child: Container(
-            width: (MediaQuery.of(context).size.width - 40.w - 50.w) / 2,
-            padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 16.w),
-            decoration: BoxDecoration(
-              color: isSelected ? AuthColors.selectedTint : AuthColors.fieldBackground,
-              borderRadius: BorderRadius.circular(12.r),
-              border: Border.all(
-                color: isSelected ? AuthColors.accent : AuthColors.fieldBorder,
-                width: isSelected ? 1.5 : 1,
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: () => onSelected(kBacSeriesList[0].code),
+                child: _buildCard(kBacSeriesList[0]),
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  series.label,
-                  style: TextStyle(
-                    color: isSelected ? AuthColors.accent : AuthColors.white,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 2.h),
-                Text(
-                  series.description,
-                  style: TextStyle(
-                    color: AuthColors.white40,
-                    fontSize: 11.sp,
-                  ),
-                ),
-              ],
+            SizedBox(width: 10.w),
+            Expanded(
+              child: GestureDetector(
+                onTap: () => onSelected(kBacSeriesList[1].code),
+                child: _buildCard(kBacSeriesList[1]),
+              ),
             ),
+          ],
+        ),
+        SizedBox(height: 10.h),
+        Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: () => onSelected(kBacSeriesList[2].code),
+                child: _buildCard(kBacSeriesList[2]),
+              ),
+            ),
+            SizedBox(width: 10.w),
+            Expanded(
+              child: GestureDetector(
+                onTap: () => onSelected(kBacSeriesList[3].code),
+                child: _buildCard(kBacSeriesList[3]),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCard(BacSeries series) {
+    final isSelected = selectedCode == series.code;
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 14.w),
+      decoration: BoxDecoration(
+        color: isSelected ? AuthColors.selectedTint : AuthColors.fieldBackground,
+        borderRadius: BorderRadius.circular(10.r),
+        border: Border.all(
+          color: isSelected ? AuthColors.accent : AuthColors.fieldBorder,
+          width: isSelected ? 1.5 : 1,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            series.label,
+            style: TextStyle(
+              color: AuthColors.white,
+              fontSize: 13.sp,
+              fontWeight: FontWeight.w600,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-        );
-      }).toList(),
+          SizedBox(height: 3.h),
+          Text(
+            series.description,
+            style: TextStyle(
+              color: AuthColors.white40,
+              fontSize: 10.sp,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
     );
   }
 }

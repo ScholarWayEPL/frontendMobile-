@@ -6,6 +6,8 @@ import '../widgets/onboarding_hero_section.dart';
 import '../widgets/onboarding_feature_card.dart';
 import '../widgets/onboarding_partners.dart';
 import '../widgets/onboarding_footer.dart';
+import '../../../auth/presentation/widgets/auth_widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -71,7 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D3D35),
+      backgroundColor: AuthColors.background,
       body:
         CustomScrollView(
           controller: _scrollController,
@@ -83,6 +85,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   SafeArea(child: OnboardingHeader(onLoginTap: _onLoginTap)),
                 ],
               ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(height: 40.h),
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {

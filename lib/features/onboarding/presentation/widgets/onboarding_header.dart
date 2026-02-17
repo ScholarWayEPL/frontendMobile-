@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingHeader extends StatelessWidget {
   final VoidCallback onLoginTap;
@@ -15,20 +16,20 @@ class OnboardingHeader extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 28,
-                height: 28,
+                width: 28.w,
+                height: 28.h,
                 decoration: BoxDecoration(
                   color: const Color(0xFF10E8A4),
                   borderRadius: BorderRadius.circular(6),
                 ),
-                child: const Icon(Icons.school, color: Colors.black, size: 16),
+                child: Icon(Icons.school, color: Colors.black, size: 16.sp),
               ),
-              const SizedBox(width: 10),
-              const Text(
+              SizedBox(width: 10.w),
+              Text(
                 'ScholarWay',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.3,
                 ),
@@ -41,10 +42,10 @@ class OnboardingHeader extends StatelessWidget {
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             ),
-            child: const Text(
+            child: Text(
               'CONNEXION',
               style: TextStyle(
-                fontSize: 11,
+                fontSize: 11.sp,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 2,
               ),

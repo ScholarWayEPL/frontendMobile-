@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../domain/entities/onboarding_feature.dart';
+import '../../../auth/presentation/widgets/auth_widgets.dart';
 
 class OnboardingFeatureCard extends StatelessWidget {
   final OnboardingFeature feature;
@@ -9,19 +11,20 @@ class OnboardingFeatureCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+      margin: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
+            margin: EdgeInsets.symmetric(horizontal: 16.w),
             width: double.infinity,
-            padding: const EdgeInsets.all(24),
+            padding: EdgeInsets.all(24.h),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 32, 61, 53),
-              borderRadius: BorderRadius.circular(20),
+              color: const Color.fromARGB(255, 21, 42, 34),
+              borderRadius: BorderRadius.circular(20.r),
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromARGB(255, 22, 99, 77).withOpacity(0.5),
+                  color: Colors.black.withOpacity(0.1),
                   blurRadius: 16,
                   offset: const Offset(0, 0),
                 ),
@@ -33,25 +36,17 @@ class OnboardingFeatureCard extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF10E8A4).withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Icon(
-                        _getIconData(feature.icon),
-                        color: const Color(0xFF10E8A4),
-                        size: 20,
-                      ),
+                    Icon(
+                      _getIconData(feature.icon),
+                      color: const Color(0xFF10E8A4),
+                      size: 40.h,
                     ),
                     const Spacer(),
                     Text(
                       feature.number,
                       style: TextStyle(
                         color: const Color(0xFFB8A992).withOpacity(0.25),
-                        fontSize: 64,
+                        fontSize: 60.sp,
                         fontWeight: FontWeight.w900,
                         height: 0.8,
                         letterSpacing: -2,
@@ -59,12 +54,12 @@ class OnboardingFeatureCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 15.h),
                 Text(
                   feature.title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: 30.sp,
                     fontWeight: FontWeight.w700,
                     height: 1.25,
                     letterSpacing: -0.3,
@@ -75,7 +70,7 @@ class OnboardingFeatureCard extends StatelessWidget {
                   feature.description,
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.7),
-                    fontSize: 13.5,
+                    fontSize: 16.sp,
                     height: 1.55,
                     fontWeight: FontWeight.w400,
                   ),
@@ -84,21 +79,53 @@ class OnboardingFeatureCard extends StatelessWidget {
             ),
           ),
           if (feature.imageUrl != null && feature.imageUrl!.isNotEmpty) ...[
-            const SizedBox(height: 16),
+            SizedBox(height: 22.h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
-                  height: 160,
-                  width: double.infinity,
+                  height: 250,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   color: const Color(0xFF2A3A35),
-                  child: Image.asset(
-                    feature.imageUrl!,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return _buildPlaceholderImage();
-                    },
+                  child: Stack(
+                    children: [
+                      // Image en noir et blanc
+                      ColorFiltered(
+                        colorFilter: const ColorFilter.mode(
+                          Colors.grey,
+                          BlendMode.saturation,
+                        ),
+                        child: SizedBox.expand(
+                          child: Image.asset(
+                            feature.imageUrl!,
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                            errorBuilder: (context, error, stackTrace) {
+                              return _buildPlaceholderImage();
+                            },
+                          ),
+                        ),
+                      ),
+                      
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            stops: const [0.0, 0.5, 1.0],
+                            colors: [
+                              // Bas très opaque pour fondre avec la page
+                              AuthColors.background.withAlpha(255),
+                              // Milieu semi-transparent pour laisser transparaître l'image
+                              AuthColors.background.withAlpha(200),
+                              // Haut transparent
+                              AuthColors.background.withAlpha(0),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

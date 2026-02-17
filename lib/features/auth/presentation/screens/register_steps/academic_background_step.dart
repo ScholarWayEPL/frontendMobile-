@@ -81,7 +81,7 @@ class _AcademicBackgroundStepState extends State<AcademicBackgroundStep> {
                           SizedBox(height: 12.h),
                           Row(
                             children: [
-                              _LocationTag(label: 'Lagos'),
+                              _LocationTag(label: 'Lomé, Togo'),
                               SizedBox(width: 10.w),
                               GestureDetector(
                                 onTap: () {
@@ -103,12 +103,12 @@ class _AcademicBackgroundStepState extends State<AcademicBackgroundStep> {
                       ),
                     ),
                     Positioned(
-                      top: 12.h,
+                      top: 5.h,
                       right: 14.w,
                       child: Icon(
-                        Icons.school_outlined,
-                        color: AuthColors.white20,
-                        size: 44.sp,
+                        Icons.school,
+                        color: AuthColors.white20.withAlpha(20),
+                        size: 60.sp,
                       ),
                     ),
                   ],
@@ -188,18 +188,18 @@ class _LocationTag extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
       decoration: BoxDecoration(
       color: AuthColors.selectedTint,
-      borderRadius: BorderRadius.circular(16.r),
+      borderRadius: BorderRadius.circular(8.r),
       border: Border.all(color: AuthColors.accent.withAlpha(80), width: 1),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.location_on, color: AuthColors.accent, size: 14.sp),
+          Icon(Icons.location_on, color: AuthColors.white70, size: 14.sp),
           SizedBox(width: 4.w),
           Text(
             label,
             style: TextStyle(
-              color: AuthColors.accent,
+              color: AuthColors.white70,
               fontSize: 12.sp,
               fontWeight: FontWeight.w500,
             ),

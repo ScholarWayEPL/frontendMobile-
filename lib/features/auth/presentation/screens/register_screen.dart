@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/auth_widgets.dart';
 import '../widgets/register/shared_widgets.dart';
 import 'register_steps/academic_background_step.dart';
 import 'register_steps/budget_simulation_step.dart';
@@ -69,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AuthColors.background,
+      backgroundColor: const Color.fromARGB(255, 11, 25, 24),
       body: Column(
         children: [
           // En-tête avec indicateur de progression

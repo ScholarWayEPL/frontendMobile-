@@ -167,17 +167,19 @@ class StepTitle extends StatelessWidget {
           style: TextStyle(
             color: AuthColors.white,
             fontSize: 28.sp,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Georgia',
             height: 1.2,
           ),
         ),
         Text(
           highlight,
           style: TextStyle(
-            color: AuthColors.accent,
+            color: AuthColors.barGold,
             fontSize: 28.sp,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w500,
             fontStyle: FontStyle.italic,
+            fontFamily: 'Georgia',
             height: 1.2,
           ),
         ),
@@ -214,16 +216,23 @@ class SectionCard extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        color: AuthColors.cardBackground,
-        borderRadius: BorderRadius.circular(18.r),
-        border: Border.all(color: AuthColors.fieldBorder, width: 1),
+        color: Color.fromARGB(255, 19, 35, 38),
+        borderRadius: BorderRadius.circular(10.r),
+        // Ombre subtile pour faire ressortir la carte
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 8.r,
+            offset: Offset(0, 4.h),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null)
             Padding(
-              padding: EdgeInsets.only(bottom: 16.h),
+              padding: EdgeInsets.only(bottom: 10.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -137,7 +137,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   /// Carte de formulaire avec bordure gradient
   Widget _buildFormCard(bool isLoading) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      margin: EdgeInsets.symmetric(horizontal: 15.w),
       width: double.infinity,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 19, 35, 38),
@@ -266,7 +266,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   children: [
                     AuthSocialButton(
                       label: 'Google',
-                      
+                      textIcon: "G",
                       onPressed: () {
                         // TODO: Google sign in
                       },

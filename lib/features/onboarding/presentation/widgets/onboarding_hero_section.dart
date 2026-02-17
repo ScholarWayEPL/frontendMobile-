@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../auth/presentation/widgets/auth_widgets.dart';
 
 class OnboardingHeroSection extends StatelessWidget {
   final VoidCallback onExplore;
@@ -16,29 +18,44 @@ class OnboardingHeroSection extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
+                child: Image.asset(
               'assets/images/onboarding0.png',
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  color: const Color(0xFF0D3D35),
+                  color: AuthColors.background,
                   child: CustomPaint(painter: VerticalLinesPainter()),
                 );
               },
             ),
           ),
           Positioned.fill(child: CustomPaint(painter: VerticalLinesPainter())),
+          // Gradient overlay that fades the image into the page background.
+          // Keep the top strongly opaque so the header remains visible.
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: const [0.0, 0.15, 0.5, 1.0],
+                stops: const [0.0, 0.12, 0.5, 1.0],
                 colors: [
-                  const Color(0xFF0D3D35).withOpacity(0.85),
-                  const Color(0xFF0D3D35).withOpacity(0.2),
-                  const Color(0xFF0D3D35).withOpacity(0.7),
-                  const Color(0xFF0D3D35).withOpacity(0.95),
+    
+                    Color.fromARGB(
+                      (0.95 * 255).round(),
+                      (AuthColors.background.value >> 16) & 0xFF,
+                      (AuthColors.background.value >> 8) & 0xFF,
+                      AuthColors.background.value & 0xFF),
+                    Color.fromARGB(
+                      (0.60 * 255).round(),
+                      (AuthColors.background.value >> 16) & 0xFF,
+                      (AuthColors.background.value >> 8) & 0xFF,
+                      AuthColors.background.value & 0xFF),
+                    Color.fromARGB(
+                      (0.28 * 255).round(),
+                      (AuthColors.background.value >> 16) & 0xFF,
+                      (AuthColors.background.value >> 8) & 0xFF,
+                      AuthColors.background.value & 0xFF),
+                  AuthColors.background,
                 ],
               ),
             ),
@@ -54,7 +71,7 @@ class OnboardingHeroSection extends StatelessWidget {
                   children: [
                     Container(
                       width: 3,
-                      height: 120,
+                      height: 150,
                       margin: const EdgeInsets.only(right: 16),
                       decoration: BoxDecoration(
                         color: const Color(0xFF10E8A4),
@@ -65,21 +82,21 @@ class OnboardingHeroSection extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'LA VOIE À SUIVRE',
                             style: TextStyle(
                               color: Color(0xFF10E8A4),
-                              fontSize: 10,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 2.5,
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           RichText(
-                            text: const TextSpan(
+                            text: TextSpan(
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 38,
+                                fontSize: 38.sp,
                                 height: 1.15,
                                 fontWeight: FontWeight.w300,
                                 letterSpacing: -0.5,
@@ -101,12 +118,12 @@ class OnboardingHeroSection extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 Text(
                   'Guidez votre transition du lycée à l\'université avec une précision intelligente et un contexte culturel adapté.',
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
-                    fontSize: 14.5,
+                    color: Color.fromARGB((0.8 * 255).round(), 255, 255, 255),
+                    fontSize: 20.sp,
                     height: 1.65,
                     fontWeight: FontWeight.w400,
                     letterSpacing: 0.1,
@@ -122,7 +139,7 @@ class OnboardingHeroSection extends StatelessWidget {
                           'EXPLORER',
                           style: TextStyle(
                             color: const Color(0xFFB8A992),
-                            fontSize: 10,
+                            fontSize: 11.sp,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 2.5,
                           ),
@@ -151,7 +168,7 @@ class VerticalLinesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFFB8A992).withOpacity(0.15)
+      ..color = Color.fromARGB((0.15 * 255).round(), 0xB8, 0xA9, 0x92)
       ..strokeWidth = 1.5;
 
     const lineSpacing = 45.0;
