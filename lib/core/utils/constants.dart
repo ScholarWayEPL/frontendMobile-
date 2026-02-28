@@ -1,7 +1,7 @@
 /// Constantes de l'application
 class AppConstants {
   // API
-  static const String baseUrl = 'https://api.scholarway.com';
+  static const String baseUrl = 'https://scholarway.pepit.cloud/api/';
   static const String apiVersion = 'v1';
 
   // Clés de stockage
@@ -21,7 +21,8 @@ class AppConstants {
 
 /// Points de terminaison API
 class ApiEndpoints {
-  static const String login = '/auth/login';
-  static const String register = '/auth/register';
-  static const String logout = '/auth/logout';
+  static const String login = 'auth/login';
+  static const String register = 'auth/register';
+  static const String registerBachelier = 'auth/register/bachelier';
+  static const String logout = 'auth/logout';
 }

@@ -16,6 +16,14 @@ abstract class AuthRepository {
     required String name,
   });
 
+  Future<Either<Failure, User>> registerBachelier({
+    required String nom,
+    required String prenom,
+    required String email,
+    required String motDePasse,
+    required String telephone,
+  });
+
   Future<Either<Failure, void>> logout();
 
   Future<Either<Failure, User>> getCurrentUser();

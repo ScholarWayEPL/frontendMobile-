@@ -74,6 +74,37 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Either<Failure, User>> registerBachelier({
+    required String nom,
+    required String prenom,
+    required String email,
+    required String motDePasse,
+    required String telephone,
+  }) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final userModel = await remoteDataSource.registerBachelier(
+          nom: nom,
+          prenom: prenom,
+          email: email,
+          motDePasse: motDePasse,
+          telephone: telephone,
+        );
+        await localDataSource.cacheUser(userModel);
+        return Right(userModel.toEntity());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.message));
+      } on NetworkException catch (e) {
+        return Left(NetworkFailure(e.message));
+      } catch (e) {
+        return Left(GeneralFailure(e.toString()));
+      }
+    } else {
+      return const Left(NetworkFailure('Pas de connexion internet'));
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> logout() async {
     try {
       await localDataSource.clearCache();

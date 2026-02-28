@@ -29,44 +29,56 @@ class BudgetInputCard extends StatelessWidget {
                 color: AuthColors.accent,
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
+                fontFamily: 'Georgia',
               ),
             ),
             SizedBox(width: 12.w),
             Expanded(
-              child: TextField(
-                controller: controller,
-                keyboardType: TextInputType.number,
-                style: TextStyle(
-                  color: AuthColors.white,
-                  fontSize: 36.sp,
-                  fontWeight: FontWeight.w700,
-                ),
-                decoration: InputDecoration(
-                  hintText: '0',
-                  hintStyle: TextStyle(
-                    color: AuthColors.white40,
-                    fontSize: 36.sp,
-                    fontWeight: FontWeight.w700,
+              child: Stack(
+                children: [
+                  TextField(
+                    controller: controller,
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(
+                      color: AuthColors.white,
+                      fontSize: 36.sp,
+                      fontFamily: 'Georgia',
+                    ),
+                    decoration: InputDecoration(
+                      hintText: '0',
+                      hintStyle: TextStyle(
+                        color: AuthColors.white40,
+                        fontSize: 36.sp,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Georgia',
+                      ),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.zero,
+                    ),
                   ),
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.zero,
-                ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Icon(
+                      Icons.account_balance_outlined,
+                      color: AuthColors.white70.withAlpha(10),
+                      size: 50.sp,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
         SizedBox(height: 8.h),
-        Container(
-          height: 1,
-          color: AuthColors.fieldBorder,
-        ),
+        Container(height: 1, color: AuthColors.fieldBorder),
         SizedBox(height: 12.h),
         // Min + label
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'MIN: 45K',
+              'MIN : 45K',
               style: TextStyle(
                 color: AuthColors.white40,
                 fontSize: 11.sp,
@@ -75,7 +87,7 @@ class BudgetInputCard extends StatelessWidget {
               ),
             ),
             Text(
-              'COMFORTABLE RANGE',
+              'ZONE DE CONFORT',
               style: TextStyle(
                 color: AuthColors.accent,
                 fontSize: 11.sp,
@@ -116,10 +128,7 @@ class CostBreakdownItem extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: TextStyle(
-                  color: AuthColors.white70,
-                  fontSize: 13.sp,
-                ),
+                style: TextStyle(color: AuthColors.white70, fontSize: 13.sp),
               ),
               Text(
                 amount,
@@ -186,7 +195,7 @@ class ProjectionBreakdownCard extends StatelessWidget {
             ),
             SizedBox(width: 10.w),
             Text(
-              'PROJECTION BREAKDOWN',
+              'DÉTAIL DE LA PROJECTION',
               style: TextStyle(
                 color: AuthColors.gold,
                 fontSize: 11.sp,
@@ -225,10 +234,7 @@ class ProjectionBreakdownCard extends StatelessWidget {
                 SizedBox(width: 4.w),
                 Text(
                   totalCurrency,
-                  style: TextStyle(
-                    color: AuthColors.white40,
-                    fontSize: 12.sp,
-                  ),
+                  style: TextStyle(color: AuthColors.white40, fontSize: 12.sp),
                 ),
               ],
             ),

@@ -56,6 +56,7 @@ dependencies:
   # Stockage local
   shared_preferences: ^2.3.3
   flutter_screenutil: ^5.9.3
+  go_router: ^17.1.0
 
 dev_dependencies:
   flutter_test:

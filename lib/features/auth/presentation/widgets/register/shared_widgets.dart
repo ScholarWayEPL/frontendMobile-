@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../auth_widgets.dart';
@@ -73,7 +74,7 @@ class StepAppBar extends StatelessWidget {
                 // Bouton retour
                 _CircleButton(
                   icon: Icons.arrow_back,
-                  onPressed: onBack ?? () => Navigator.of(context).pop(),
+                  onPressed: onBack ?? () => context.pop(),
                 ),
                 // Label étape
                 Text(
@@ -86,17 +87,11 @@ class StepAppBar extends StatelessWidget {
                   ),
                 ),
                 // Bouton aide
-                _CircleButton(
-                  icon: Icons.help_outline,
-                  onPressed: onHelp,
-                ),
+                _CircleButton(icon: Icons.help_outline, onPressed: onHelp),
               ],
             ),
             SizedBox(height: 10.h),
-            StepIndicator(
-              currentStep: currentStep,
-              totalSteps: totalSteps,
-            ),
+            StepIndicator(currentStep: currentStep, totalSteps: totalSteps),
           ],
         ),
       ),
@@ -109,11 +104,11 @@ class _CircleButton extends StatelessWidget {
   final String? letter;
   final VoidCallback? onPressed;
 
-  const _CircleButton({
-    this.icon,
-    this.letter,
-    this.onPressed,
-  }) : assert(icon != null || letter != null, 'Either icon or letter must be provided');
+  const _CircleButton({this.icon, this.letter, this.onPressed})
+    : assert(
+        icon != null || letter != null,
+        'Either icon or letter must be provided',
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -335,10 +330,7 @@ class StepBottomBar extends StatelessWidget {
                   onPressed: onSecondary,
                   style: OutlinedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 16.h),
-                    side: BorderSide(
-                      color: AuthColors.fieldBorder,
-                      width: 1,
-                    ),
+                    side: BorderSide(color: AuthColors.fieldBorder, width: 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14.r),
                     ),

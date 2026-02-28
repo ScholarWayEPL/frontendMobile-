@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../../domain/entities/onboarding_feature.dart';
 import '../../domain/entities/partner.dart';
@@ -61,51 +62,46 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _onLoginTap() {
-    // TODO: Navigation vers la page de connexion
-    Navigator.pushNamed(context, '/login');
+    context.push('/login');
   }
 
   void _onStartTap() {
-    // TODO: Navigation vers l'inscription ou le profil
-    Navigator.pushNamed(context, '/register');
+    context.push('/register');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AuthColors.background,
-      body:
-        CustomScrollView(
-          controller: _scrollController,
-          slivers: [
-            SliverToBoxAdapter(
-              child: Stack(
-                children: [
-                  OnboardingHeroSection(onExplore: _scrollToContent),
-                  SafeArea(child: OnboardingHeader(onLoginTap: _onLoginTap)),
-                ],
-              ),
+      body: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          SliverToBoxAdapter(
+            child: Stack(
+              children: [
+                OnboardingHeroSection(onExplore: _scrollToContent),
+                SafeArea(child: OnboardingHeader(onLoginTap: _onLoginTap)),
+              ],
             ),
-            SliverToBoxAdapter(
-              child: SizedBox(height: 40.h),
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: 40.h)),
+          SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              return OnboardingFeatureCard(feature: features[index]);
+            }, childCount: features.length),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                SizedBox(height: 40.h),
+                OnboardingPartners(partners: partners),
+                OnboardingFooter(onStartTap: _onStartTap),
+                SizedBox(height: 20.h),
+              ],
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                return OnboardingFeatureCard(feature: features[index]);
-              }, childCount: features.length),
-            ),
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  const SizedBox(height: 40),
-                  OnboardingPartners(partners: partners),
-                  OnboardingFooter(onStartTap: _onStartTap),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
 }

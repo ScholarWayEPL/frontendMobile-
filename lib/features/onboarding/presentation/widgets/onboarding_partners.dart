@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../domain/entities/partner.dart';
 
 class OnboardingPartners extends StatelessWidget {
@@ -9,19 +10,19 @@ class OnboardingPartners extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 48.h),
       child: Column(
         children: [
           Text(
             'LA CONFIANCE DES FUTURS LEADERS',
             style: TextStyle(
               color: const Color(0xFFB8A992),
-              fontSize: 10,
+              fontSize: 10.sp,
               fontWeight: FontWeight.w700,
               letterSpacing: 2.5,
             ),
           ),
-          const SizedBox(height: 36),
+          SizedBox(height: 36.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: partners.map((partner) {
@@ -35,10 +36,10 @@ class OnboardingPartners extends StatelessWidget {
 
   Widget _buildPartnerLogo(Partner partner) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
       decoration: BoxDecoration(
         color: const Color(0xFF1A4A42).withOpacity(0.3),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(6.r),
         border: Border.all(
           color: const Color(0xFFB8A992).withOpacity(0.15),
           width: 1,
@@ -50,14 +51,14 @@ class OnboardingPartners extends StatelessWidget {
           Icon(
             Icons.account_balance,
             color: const Color(0xFFB8A992).withOpacity(0.7),
-            size: 16,
+            size: 16.sp,
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8.w),
           Text(
             partner.name,
             style: TextStyle(
               color: const Color(0xFFB8A992).withOpacity(0.9),
-              fontSize: 12,
+              fontSize: 12.sp,
               fontWeight: FontWeight.w700,
               letterSpacing: 1.2,
             ),

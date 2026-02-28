@@ -43,7 +43,7 @@ class SubjectGradeItem extends StatelessWidget {
             width: 40.w,
             height: 40.w,
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
+              borderRadius: BorderRadius.circular(8.r),
               color: AuthColors.fieldBackground,
               border: Border.all(color: AuthColors.fieldBorder, width: 1),
             ),
@@ -92,7 +92,7 @@ class SubjectGradeItem extends StatelessWidget {
           Column(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
                 decoration: BoxDecoration(
                   color: AuthColors.fieldBackground,
                   borderRadius: BorderRadius.circular(10.r),
@@ -102,7 +102,7 @@ class SubjectGradeItem extends StatelessWidget {
                   subject.grade.toInt().toString(),
                   style: TextStyle(
                     color: AuthColors.accent,
-                    fontSize: 18.sp,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

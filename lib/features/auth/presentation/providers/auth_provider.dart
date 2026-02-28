@@ -1,24 +1,42 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/usecases/login_usecase.dart';
-import '../../domain/usecases/logout_usecase.dart';
 import '../../domain/usecases/register_usecase.dart';
-import '../state/auth_state.dart';
+import '../../domain/usecases/register_bachelier_usecase.dart';
+import '../../domain/usecases/get_current_user_usecase.dart';
 import '../../../../core/usecases/usecase.dart';
+import '../state/auth_state.dart';
 
 /// Notifier pour gérer l'état d'authentification
 class AuthNotifier extends StateNotifier<AuthState> {
   final LoginUseCase _loginUseCase;
   final RegisterUseCase _registerUseCase;
-  final LogoutUseCase _logoutUseCase;
+  final RegisterBachelierUseCase _registerBachelierUseCase;
+  final GetCurrentUserUseCase _getCurrentUserUseCase;
 
   AuthNotifier({
     required LoginUseCase loginUseCase,
     required RegisterUseCase registerUseCase,
-    required LogoutUseCase logoutUseCase,
+    required RegisterBachelierUseCase registerBachelierUseCase,
+    required GetCurrentUserUseCase getCurrentUserUseCase,
   }) : _loginUseCase = loginUseCase,
        _registerUseCase = registerUseCase,
-       _logoutUseCase = logoutUseCase,
-       super(const AuthInitial());
+       _registerBachelierUseCase = registerBachelierUseCase,
+       _getCurrentUserUseCase = getCurrentUserUseCase,
+       super(const AuthInitial()) {
+    checkAuthStatus();
+  }
+
+  /// Vérifier l'état d'authentification au démarrage
+  Future<void> checkAuthStatus() async {
+    state = const AuthLoading();
+
+    final result = await _getCurrentUserUseCase(NoParams());
+
+    state = result.fold(
+      (failure) => const AuthUnauthenticated(),
+      (user) => AuthAuthenticated(user),
+    );
+  }
 
   /// Connexion utilisateur
   Future<void> login({required String email, required String password}) async {
@@ -52,16 +70,37 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  /// Déconnexion utilisateur
-  Future<void> logout() async {
+  /// Inscription bachelier
+  Future<void> registerBachelier({
+    required String nom,
+    required String prenom,
+    required String email,
+    required String motDePasse,
+    required String telephone,
+  }) async {
     state = const AuthLoading();
 
-    final result = await _logoutUseCase(const NoParams());
+    final result = await _registerBachelierUseCase(
+      RegisterBachelierParams(
+        nom: nom,
+        prenom: prenom,
+        email: email,
+        motDePasse: motDePasse,
+        telephone: telephone,
+      ),
+    );
 
     state = result.fold(
       (failure) => AuthError(failure.message),
-      (_) => const AuthUnauthenticated(),
+      (user) => AuthAuthenticated(user),
     );
+  }
+
+  /// Déconnexion utilisateur
+  Future<void> logout() async {
+    state = const AuthLoading();
+    // Plus d'appel backend selon la demande utilisateur
+    state = const AuthUnauthenticated();
   }
 
   /// Réinitialiser l'état

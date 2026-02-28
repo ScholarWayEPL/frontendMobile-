@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,7 +10,12 @@ class OnboardingHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 12, bottom: 12),
+      padding: EdgeInsets.only(
+        left: 20.w,
+        right: 20.w,
+        top: 12.h,
+        bottom: 12.h,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -20,7 +26,7 @@ class OnboardingHeader extends StatelessWidget {
                 height: 28.h,
                 decoration: BoxDecoration(
                   color: const Color(0xFF10E8A4),
-                  borderRadius: BorderRadius.circular(6),
+                  borderRadius: BorderRadius.circular(6.r),
                 ),
                 child: Icon(Icons.school, color: Colors.black, size: 16.sp),
               ),
@@ -37,10 +43,10 @@ class OnboardingHeader extends StatelessWidget {
             ],
           ),
           TextButton(
-            onPressed: onLoginTap,
+            onPressed: () => context.push('/login'),
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             ),
             child: Text(
               'CONNEXION',

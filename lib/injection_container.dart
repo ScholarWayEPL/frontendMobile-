@@ -11,8 +11,9 @@ import 'features/auth/data/datasources/auth_remote_datasource.dart';
 import 'features/auth/data/repositories/auth_repository_impl.dart';
 import 'features/auth/domain/repositories/auth_repository.dart';
 import 'features/auth/domain/usecases/login_usecase.dart';
-import 'features/auth/domain/usecases/logout_usecase.dart';
 import 'features/auth/domain/usecases/register_usecase.dart';
+import 'features/auth/domain/usecases/register_bachelier_usecase.dart';
+import 'features/auth/domain/usecases/get_current_user_usecase.dart';
 import 'features/auth/presentation/providers/auth_provider.dart';
 
 /// Service Locator pour l'injection de dépendances
@@ -72,8 +73,14 @@ final registerUseCaseProvider = Provider<RegisterUseCase>((ref) {
   return RegisterUseCase(ref.read(authRepositoryProvider));
 });
 
-final logoutUseCaseProvider = Provider<LogoutUseCase>((ref) {
-  return LogoutUseCase(ref.read(authRepositoryProvider));
+final registerBachelierUseCaseProvider = Provider<RegisterBachelierUseCase>((
+  ref,
+) {
+  return RegisterBachelierUseCase(ref.read(authRepositoryProvider));
+});
+
+final getCurrentUserUseCaseProvider = Provider<GetCurrentUserUseCase>((ref) {
+  return GetCurrentUserUseCase(ref.read(authRepositoryProvider));
 });
 
 // Provider pour AuthNotifier
@@ -83,7 +90,8 @@ final authNotifierProvider = StateNotifierProvider<AuthNotifier, AuthState>((
   return AuthNotifier(
     loginUseCase: ref.read(loginUseCaseProvider),
     registerUseCase: ref.read(registerUseCaseProvider),
-    logoutUseCase: ref.read(logoutUseCaseProvider),
+    registerBachelierUseCase: ref.read(registerBachelierUseCaseProvider),
+    getCurrentUserUseCase: ref.read(getCurrentUserUseCaseProvider),
   );
 });
 

@@ -39,35 +39,35 @@ class _BudgetSimulationStepState extends State<BudgetSimulationStep> {
               children: [
                 SizedBox(height: 20.h),
                 const StepTitle(
-                  title: 'Budget',
-                  highlight: 'Simulation',
+                  title: 'Simulation',
+                  highlight: 'Budgétaire',
                   description:
-                      'Let\'s calculate a transparent estimate of your academic year. Input your financial parameters below.',
+                      'Établissons une estimation transparente de votre année académique. Entrez vos paramètres financiers ci‑dessous.',
                 ),
                 SizedBox(height: 28.h),
 
-                // Monthly Allowance
+                // Capacité Mensuelle
                 SectionCard(
-                  label: 'MONTHLY ALLOWANCE CAPACITY',
+                  label: 'CAPACITÉ MENSUELLE',
                   child: BudgetInputCard(controller: _budgetController),
                 ),
                 SizedBox(height: 16.h),
 
-                // Projection Breakdown
+                // Détail de la projection
                 SectionCard(
                   child: ProjectionBreakdownCard(
-                    totalLabel: 'Estimated Annual Cost',
-                    totalAmount: '1.85M',
+                    totalLabel: 'Coût Annuel Estimé',
+                    totalAmount: '1,85M',
                     totalCurrency: 'XOF',
                     items: [
                       CostBreakdownItem(
-                        label: 'Tuition Fees',
-                        amount: '1.2M',
+                        label: 'Frais de Scolarité',
+                        amount: '1,2M',
                         barColor: AuthColors.accent,
                         progress: 0.65,
                       ),
                       CostBreakdownItem(
-                        label: 'Living & Housing',
+                        label: 'Logement & Vie',
                         amount: '650k',
                         barColor: AuthColors.barTeal,
                         progress: 0.35,
@@ -141,7 +141,7 @@ class _BudgetSimulationStepState extends State<BudgetSimulationStep> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'CONFIRM BUDGET',
+                      'VALIDER LE BUDGET',
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,

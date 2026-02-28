@@ -14,6 +14,14 @@ abstract class AuthRemoteDataSource {
     required String name,
   });
 
+  Future<UserModel> registerBachelier({
+    required String nom,
+    required String prenom,
+    required String email,
+    required String motDePasse,
+    required String telephone,
+  });
+
   Future<void> logout();
 
   Future<UserModel> getCurrentUser();
@@ -33,20 +41,40 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       final response = await dio.post(
         ApiEndpoints.login,
-        data: {'email': email, 'password': password},
+        data: {'email': email, 'motDePasse': password},
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return UserModel.fromJson(response.data['data'] ?? response.data);
+        final data = response.data;
+        if (data is Map<String, dynamic>) {
+          try {
+            return UserModel.fromJson(data['data'] ?? data);
+          } catch (e) {
+            throw ServerException(
+              'Erreur de formatage des données (JSON parsing error): $e',
+            );
+          }
+        } else {
+          throw ServerException(
+            'Réponse du serveur invalide (format non-JSON)',
+          );
+        }
       } else {
-        throw ServerException(
-          response.data['message'] ?? 'Erreur lors de la connexion',
-        );
+        final data = response.data;
+        String message = 'Erreur lors de la connexion';
+        if (data is Map<String, dynamic>) {
+          message = data['message'] ?? message;
+        }
+        throw ServerException(message);
       }
     } on DioException catch (e) {
       throw _handleDioError(e);
+    } on ServerException {
+      rethrow;
     } catch (e) {
-      throw ServerException('Erreur inattendue: ${e.toString()}');
+      throw ServerException(
+        'Erreur inattendue lors de la connexion: ${e.toString()}',
+      );
     }
   }
 
@@ -63,16 +91,90 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return UserModel.fromJson(response.data['data'] ?? response.data);
+        final data = response.data;
+        if (data is Map<String, dynamic>) {
+          try {
+            return UserModel.fromJson(data['data'] ?? data);
+          } catch (e) {
+            throw ServerException(
+              'Erreur de formatage des données (JSON parsing error): $e',
+            );
+          }
+        } else {
+          throw ServerException(
+            'Réponse du serveur invalide (format non-JSON)',
+          );
+        }
       } else {
-        throw ServerException(
-          response.data['message'] ?? 'Erreur lors de l\'inscription',
-        );
+        final data = response.data;
+        String message = 'Erreur lors de l\'inscription';
+        if (data is Map<String, dynamic>) {
+          message = data['message'] ?? message;
+        }
+        throw ServerException(message);
       }
     } on DioException catch (e) {
       throw _handleDioError(e);
+    } on ServerException {
+      rethrow;
     } catch (e) {
-      throw ServerException('Erreur inattendue: ${e.toString()}');
+      throw ServerException(
+        'Erreur inattendue lors de l\'inscription: ${e.toString()}',
+      );
+    }
+  }
+
+  @override
+  Future<UserModel> registerBachelier({
+    required String nom,
+    required String prenom,
+    required String email,
+    required String motDePasse,
+    required String telephone,
+  }) async {
+    try {
+      final response = await dio.post(
+        ApiEndpoints.registerBachelier,
+        data: {
+          'nom': nom,
+          'prenom': prenom,
+          'email': email,
+          'motDePasse': motDePasse,
+          'telephone': telephone,
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        if (data is Map<String, dynamic>) {
+          try {
+            return UserModel.fromJson(data['data'] ?? data);
+          } catch (e) {
+            throw ServerException(
+              'Erreur de formatage des données (JSON parsing error): $e',
+            );
+          }
+        } else {
+          throw ServerException(
+            'Réponse du serveur invalide (format non-JSON)',
+          );
+        }
+      } else {
+        final data = response.data;
+        String message = 'Erreur lors de l\'inscription bachelier';
+        if (data is Map<String, dynamic>) {
+          message = data['message'] ?? message;
+        }
+        throw ServerException(message);
+      }
+    } on DioException catch (e) {
+      throw _handleDioError(e);
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(
+        'Erreur inattendue lors de l\'inscription bachelier: ${e.toString()}',
+      );
     }
   }
 
@@ -94,19 +196,39 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<UserModel> getCurrentUser() async {
     try {
-      final response = await dio.get('/auth/me');
+      final response = await dio.get('auth/me');
 
       if (response.statusCode == 200) {
-        return UserModel.fromJson(response.data['data'] ?? response.data);
+        final data = response.data;
+        if (data is Map<String, dynamic>) {
+          try {
+            return UserModel.fromJson(data['data'] ?? data);
+          } catch (e) {
+            throw ServerException(
+              'Erreur de formatage des données utilisateur: $e',
+            );
+          }
+        } else {
+          throw ServerException(
+            'Réponse du serveur invalide (format non-JSON)',
+          );
+        }
       } else {
-        throw ServerException(
-          response.data['message'] ?? 'Impossible de récupérer l\'utilisateur',
-        );
+        final data = response.data;
+        String message = 'Impossible de récupérer l\'utilisateur';
+        if (data is Map<String, dynamic>) {
+          message = data['message'] ?? message;
+        }
+        throw ServerException(message);
       }
     } on DioException catch (e) {
       throw _handleDioError(e);
+    } on ServerException {
+      rethrow;
     } catch (e) {
-      throw ServerException('Erreur inattendue: ${e.toString()}');
+      throw ServerException(
+        'Erreur inattendue lors de la récupération du profil: ${e.toString()}',
+      );
     }
   }
 
@@ -120,10 +242,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       case DioExceptionType.badResponse:
         final statusCode = error.response?.statusCode;
-        final message =
-            error.response?.data['message'] ??
-            error.response?.statusMessage ??
-            'Erreur serveur';
+        final data = error.response?.data;
+        String message = 'Erreur serveur';
+
+        if (data is Map<String, dynamic>) {
+          message = data['message'] ?? error.response?.statusMessage ?? message;
+        } else {
+          message = error.response?.statusMessage ?? message;
+        }
 
         if (statusCode == 401) {
           return AuthException('Non autorisé: $message');
@@ -132,7 +258,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         } else if (statusCode == 404) {
           return ServerException('Ressource non trouvée');
         } else if (statusCode != null && statusCode >= 500) {
-          return ServerException('Erreur serveur: $message');
+          return ServerException('Erreur serveur ($statusCode): $message');
         }
         return ServerException(message);
 

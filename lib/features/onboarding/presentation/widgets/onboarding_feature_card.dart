@@ -11,7 +11,7 @@ class OnboardingFeatureCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16),
+      margin: EdgeInsets.symmetric(vertical: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -65,7 +65,7 @@ class OnboardingFeatureCard extends StatelessWidget {
                     letterSpacing: -0.3,
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12.h),
                 Text(
                   feature.description,
                   style: TextStyle(
@@ -83,9 +83,9 @@ class OnboardingFeatureCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
                 child: Container(
-                  height: 250,
+                  height: 250.h,
                   width: MediaQuery.of(context).size.width * 0.8,
                   color: const Color(0xFF2A3A35),
                   child: Stack(
@@ -107,7 +107,7 @@ class OnboardingFeatureCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      
+
                       Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -148,7 +148,7 @@ class OnboardingFeatureCard extends StatelessWidget {
       child: Center(
         child: Icon(
           Icons.groups_outlined,
-          size: 64,
+          size: 64.sp,
           color: Colors.white.withOpacity(0.2),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../widgets/register/shared_widgets.dart';
 import 'register_steps/academic_background_step.dart';
@@ -56,13 +57,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (_currentStep > 1) {
       _goToStep(_currentStep - 1);
     } else {
-      Navigator.of(context).pop();
+      context.pop();
     }
   }
 
   void _onComplete() {
     // TODO: Soumettre les données d'inscription
-    Navigator.of(context).pushReplacementNamed('/login');
+    context.go('/home');
   }
 
   @override
@@ -90,18 +91,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // TODO: Sauvegarder le brouillon
                   },
                 ),
-                BudgetSimulationStep(
-                  onNext: _nextStep,
-                  onBack: _previousStep,
-                ),
-                CareerObjectivesStep(
-                  onNext: _nextStep,
-                  onBack: _previousStep,
-                ),
-                ReviewStep(
-                  onNext: _onComplete,
-                  onBack: _previousStep,
-                ),
+                BudgetSimulationStep(onNext: _nextStep, onBack: _previousStep),
+                CareerObjectivesStep(onNext: _nextStep, onBack: _previousStep),
+                ReviewStep(onNext: _onComplete, onBack: _previousStep),
               ],
             ),
           ),

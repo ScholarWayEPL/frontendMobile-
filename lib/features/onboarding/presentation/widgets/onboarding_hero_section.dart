@@ -18,7 +18,7 @@ class OnboardingHeroSection extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-                child: Image.asset(
+            child: Image.asset(
               'assets/images/onboarding0.png',
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
@@ -39,29 +39,31 @@ class OnboardingHeroSection extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 stops: const [0.0, 0.12, 0.5, 1.0],
                 colors: [
-    
-                    Color.fromARGB(
-                      (0.95 * 255).round(),
-                      (AuthColors.background.value >> 16) & 0xFF,
-                      (AuthColors.background.value >> 8) & 0xFF,
-                      AuthColors.background.value & 0xFF),
-                    Color.fromARGB(
-                      (0.60 * 255).round(),
-                      (AuthColors.background.value >> 16) & 0xFF,
-                      (AuthColors.background.value >> 8) & 0xFF,
-                      AuthColors.background.value & 0xFF),
-                    Color.fromARGB(
-                      (0.28 * 255).round(),
-                      (AuthColors.background.value >> 16) & 0xFF,
-                      (AuthColors.background.value >> 8) & 0xFF,
-                      AuthColors.background.value & 0xFF),
+                  Color.fromARGB(
+                    (0.95 * 255).round(),
+                    (AuthColors.background.value >> 16) & 0xFF,
+                    (AuthColors.background.value >> 8) & 0xFF,
+                    AuthColors.background.value & 0xFF,
+                  ),
+                  Color.fromARGB(
+                    (0.60 * 255).round(),
+                    (AuthColors.background.value >> 16) & 0xFF,
+                    (AuthColors.background.value >> 8) & 0xFF,
+                    AuthColors.background.value & 0xFF,
+                  ),
+                  Color.fromARGB(
+                    (0.28 * 255).round(),
+                    (AuthColors.background.value >> 16) & 0xFF,
+                    (AuthColors.background.value >> 8) & 0xFF,
+                    AuthColors.background.value & 0xFF,
+                  ),
                   AuthColors.background,
                 ],
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -70,12 +72,12 @@ class OnboardingHeroSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: 3,
-                      height: 150,
-                      margin: const EdgeInsets.only(right: 16),
+                      width: 3.w,
+                      height: 150.h,
+                      margin: EdgeInsets.only(right: 16.w),
                       decoration: BoxDecoration(
                         color: const Color(0xFF10E8A4),
-                        borderRadius: BorderRadius.circular(2),
+                        borderRadius: BorderRadius.circular(2.r),
                       ),
                     ),
                     Expanded(
@@ -91,7 +93,7 @@ class OnboardingHeroSection extends StatelessWidget {
                               letterSpacing: 2.5,
                             ),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 16.h),
                           RichText(
                             text: TextSpan(
                               style: TextStyle(
@@ -144,17 +146,17 @@ class OnboardingHeroSection extends StatelessWidget {
                             letterSpacing: 2.5,
                           ),
                         ),
-                        const SizedBox(height: 6),
+                        SizedBox(height: 6.h),
                         Icon(
                           Icons.keyboard_arrow_down,
                           color: const Color(0xFFB8A992),
-                          size: 20,
+                          size: 20.sp,
                         ),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
               ],
             ),
           ),
